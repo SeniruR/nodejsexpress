@@ -1,5 +1,4 @@
 'use strict';
-const config = require('../config');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
@@ -9,7 +8,7 @@ chai.use(chaiHttp);
 
 describe('/GET', () => {
     it('returns the homepage', (done) => {
-        chai.request(`http://localhost:${config.port}`)
+        chai.request(server)
             .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
