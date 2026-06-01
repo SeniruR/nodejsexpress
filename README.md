@@ -43,6 +43,14 @@ Follow my step-by-step guide: [Build Your First CI/CD Pipeline using Azure DevOp
 
 This walkthrough contains all the steps you should follow to fork this repo and build your own automated build and release pipeline.
 
+## GitHub Actions CI/CD
+
+1. Runs on every push and pull request.
+2. Installs dependencies, runs `npm test`, and only if that passes, triggers a staging deployment from the `main` branch.
+
+The staging deployment uses a Render deploy hook. To enable it, create a GitHub repository secret named `RENDER_DEPLOY_HOOK_URL` and point it to your Render staging service's deploy hook URL.
+
+
 ## App Info
 
 ### Author

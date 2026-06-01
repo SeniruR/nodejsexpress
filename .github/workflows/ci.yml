@@ -27,3 +27,20 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  deploy-staging:
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render staging deployment
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
+            echo "RENDER_DEPLOY_HOOK_URL secret is not configured"
+            exit 1
+          fi
+
+          curl -fsSL -X POST "$RENDER_DEPLOY_HOOK_URL"
